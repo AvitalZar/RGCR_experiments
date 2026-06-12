@@ -1,0 +1,3 @@
+git+https://github.com/AvitalZar/pref_voting.git
+experiments_csv>=0.5.4
+experiments_csv[plotting]
