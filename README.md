@@ -28,16 +28,22 @@ Key observations include:
 ## Results
 You can see the results in the *.png files in results.
 
-**Examples:**
-1. *Kendall-Tau distance comprison*
+### Examples
+
+1. **Kendall-Tau Distance Comparison**
 
    <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/e798e938-a938-454f-91d3-585161fe717e" />
-In this graph you can see the kendall-tau distance of the solution of the algorithms from the right solution.
-As shown in the graph, the kendal-tau dist of the rgcr algo stays a lot under 1000 while the results of the average algo get even to 7000.
-The results are an avarage over 10 runs with 10 different seeds.
+   
+   This graph illustrates the Kendall-Tau distance between the algorithms' outputs and the ground truth. A lower value indicates a solution closer to the target. As shown, the `rgcr` algorithm consistently maintains a distance well below 1,000, whereas the `avg_solution` distance climbs as high as 7,000. These results are averaged over 10 runs using 10 different seeds.
 
-2. *run time comparison*
+2. **Recall 5**
 
-  <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/e73c9d1f-1252-49a4-80e9-63d0b5c06fea" />
-In this graph you can see the run time of every algorithm. The longest algo is the rgcr before improving, and the shortest is the avg. As you can see rgcr take time, but the rgcr after improving is much better then before. You can see specific comparisons between the rgcrs and between avg and the improved rgcr in the results package.
+   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/ad37284f-c76c-482d-aadb-a22c2970d8b8" />
+   
+   This graph presents the Recall 5 metric, measuring the number of overlapping items between the algorithm's top-5 output and the ground truth. The `rgcr` algorithm achieves a perfect score of 5, successfully identifying the top 5 ranked items (with the exception of the 20-reviewer case, where it remains near 5). In contrast, the `avg_solution` exhibits significantly lower recall. The non-integer values represent an average over 10 runs.
 
+3. **Runtime Comparison**
+
+   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/e73c9d1f-1252-49a4-80e9-63d0b5c06fea" />
+   
+   This graph compares the execution time of each algorithm. While `avg_solution` remains the fastest, the optimization of `rgcr` into `rgcr_fast` significantly reduces its runtime compared to the original implementation. Despite this improvement, `rgcr_fast` remains slightly slower than the `avg_solution`. Detailed comparisons between the different versions and the baseline are available in the results package.
