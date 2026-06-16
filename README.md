@@ -24,3 +24,20 @@ Key observations include:
 * When configured with 20 reviewers, the program consistently crashes upon reaching 30,000 items.
 * When the input size was explicitly capped at 30,000 items, sporadic crashes still occurred, occasionally failing at approximately 20,000 items.
 * Throughout these intensive test runs, the maximum recorded execution time prior to a memory crash was approximately 13 seconds.
+
+## Results
+You can see the results in the *.png files in results.
+
+**Examples:**
+1. *Kendall-Tau distance comprison*
+
+   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/e798e938-a938-454f-91d3-585161fe717e" />
+In this graph you can see the kendall-tau distance of the solution of the algorithms from the right solution.
+As shown in the graph, the kendal-tau dist of the rgcr algo stays a lot under 1000 while the results of the average algo get even to 7000.
+The results are an avarage over 10 runs with 10 different seeds.
+
+2. *run time comparison*
+
+  <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/e73c9d1f-1252-49a4-80e9-63d0b5c06fea" />
+In this graph you can see the run time of every algorithm. The longest algo is the rgcr before improving, and the shortest is the avg. As you can see rgcr take time, but the rgcr after improving is much better then before. You can see specific comparisons between the rgcrs and between avg and the improved rgcr in the results package.
+
