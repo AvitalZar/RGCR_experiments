@@ -32,13 +32,13 @@ You can see the results in the *.png files in results.
 
 1. **Kendall-Tau Distance Comparison**
 
-   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/0abb74ca-5daf-4086-ba23-c3e5e370dbde" />
+   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/de68aef2-10e5-4cda-9bd2-f8930830c9be" />
    
    This graph illustrates the Kendall-Tau distance between the algorithms' outputs and the ground truth. A higher value indicates a solution closer to the target. As shown, the `rgcr` algorithm consistently maintains a distance close to 1, whereas the `avg_solution` distance can't get there. In case of 80 reviewers the results are almost perfect for rgcr. These results are averaged over 10 runs using 10 different seeds.
 
 2. **Recall 5**
 
-   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/187fc473-5b63-4feb-8624-cedb172b63a2" />
+   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/28eb5f24-99e1-4da7-8f54-d4cb11c244dc" />
    
    This graph presents the Recall 5 metric, measuring the normalized number of overlapping items between the algorithm's top-5 output and the ground truth. The `rgcr` algorithm never go below 0.8, means it constantly right with 4/5 first items right. In contrast, the `avg_solution` exhibits significantly lower recall.
 
