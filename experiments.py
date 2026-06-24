@@ -109,7 +109,7 @@ multi_plot_results(
 # 2. Kendall-Tau Distance plot
 multi_plot_results(
     results_csv_file=csv_path, 
-    filter={"func": ["rgcr_solution", "avg_solution"], "reviewers": [20,80]}, 
+    filter={"func": ["rgcr_solution", "avg_solution", "rgcr_fast_solution"], "reviewers": [20,80]}, 
     subplot_rows=1, 
     subplot_cols=2,
     x_field="items", 
@@ -125,7 +125,7 @@ multi_plot_results(
 # 3. Recall plot
 multi_plot_results(
     results_csv_file=csv_path, 
-    filter={"func": ["rgcr_solution", "avg_solution"], "reviewers": [20,80]}, 
+    filter={"func": ["rgcr_solution", "avg_solution", "rgcr_fast_solution"], "reviewers": [20,80]}, 
     subplot_rows=1, 
     subplot_cols=2,
     x_field="items", 
