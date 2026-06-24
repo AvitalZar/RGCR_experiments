@@ -1,10 +1,27 @@
 import experiments_csv
 from experiments_csv import multi_plot_results
-from rgcr_lite.rgcr_methods import RGCR, create_random_voters_list #venv_1
+from rgcr_lite.rgcr_methods import RGCR #venv_1
 #from pref_voting.stochastic_methods import RGCR #venv_2
 #from pref_voting.grade_profiles import GradeProfile #venv_2
 from scipy.stats import kendalltau
 import time
+import numpy as np
+
+
+
+def create_random_voters_list(num_of_voters=5, num_of_cands=20, reviewing_prob=0.3, seed=None):
+	np.random.seed(seed)
+	candidates = list(range(num_of_cands))
+	voters = []
+	for _ in range(num_of_voters):
+		voter = {}
+		val = 0
+		for c in candidates:
+			if np.random.rand() < reviewing_prob:
+				voter[c] = val + np.random.randint(0, 10)+1
+				val = voter[c]
+		voters.append(voter)
+	return voters
 
 
 def probabilistic_run(func, seed, items, reviewers) -> dict:
@@ -20,17 +37,16 @@ def probabilistic_run(func, seed, items, reviewers) -> dict:
 
 	target_set = set(list_of_items[-5:])
 	top_5_ranked = set(ranking[:5])
-	recall_5 = len(top_5_ranked.intersection(target_set))
+	recall_5 = len(top_5_ranked.intersection(target_set))/5
 
 	true_order = list_of_items[::-1]
 	kendall_tau = kendalltau(ranking, true_order).statistic
-	kendall_tau_dist = int(round((items * (items - 1) * (1 - kendall_tau)) / 4))
 
 	return {
 		"ranking": ranking,
-		"runtime": runtime,
+		"runtime sec.": runtime,
 		"recall_5": recall_5,
-		"kendall_tau": kendall_tau_dist
+		"kendall_tau": kendall_tau
 	}
 
 
@@ -57,7 +73,10 @@ ex = experiments_csv.Experiment("results/", "simple_comparison.csv")
 
 input_range = {
 	"seed": range(10),
-	"func": [rgcr_solution, avg_solution, rgcr_fast_solution],
+	"func": [rgcr_solution, 
+		avg_solution
+		, rgcr_fast_solution
+        ],
 	"items": range(10, 1000, 100),
 	"reviewers": range(20, 100, 20)
 }
@@ -74,13 +93,13 @@ csv_path = "results/simple_comparison.csv"
 # 1. Runtime plot
 multi_plot_results(
     results_csv_file=csv_path, 
-    filter={"func": ["rgcr_solution", "avg_solution", "rgcr_fast_solution"]}, 
+    filter={"func": ["rgcr_solution", "avg_solution", "rgcr_fast_solution"], "reviewers": [20,80]}, 
     subplot_rows=1, 
-    subplot_cols=3,
+    subplot_cols=2,
     x_field="items", 
-    y_field="runtime", 
-    z_field="reviewers", 
-    subplot_field="func", 
+    y_field="runtime sec.", 
+    z_field="func", 
+    subplot_field="reviewers", 
     sharex=True, 
     sharey=True, 
     mean=True, 
@@ -90,13 +109,13 @@ multi_plot_results(
 # 2. Kendall-Tau Distance plot
 multi_plot_results(
     results_csv_file=csv_path, 
-    filter={"func": ["rgcr_solution", "avg_solution"]}, 
+    filter={"func": ["rgcr_solution", "avg_solution"], "reviewers": [20,80]}, 
     subplot_rows=1, 
     subplot_cols=2,
     x_field="items", 
     y_field="kendall_tau", 
-    z_field="reviewers", 
-    subplot_field="func", 
+    z_field="func", 
+    subplot_field="reviewers", 
     sharex=True, 
     sharey=True, 
     mean=True, 
@@ -106,13 +125,13 @@ multi_plot_results(
 # 3. Recall plot
 multi_plot_results(
     results_csv_file=csv_path, 
-    filter={"func": ["rgcr_solution", "avg_solution"]}, 
+    filter={"func": ["rgcr_solution", "avg_solution"], "reviewers": [20,80]}, 
     subplot_rows=1, 
     subplot_cols=2,
     x_field="items", 
     y_field="recall_5", 
-    z_field="reviewers", 
-    subplot_field="func", 
+    z_field="func", 
+    subplot_field="reviewers", 
     sharex=True, 
     sharey=True, 
     mean=True, 
@@ -124,11 +143,11 @@ multi_plot_results(
     results_csv_file=csv_path, 
     filter={"func": ["rgcr_solution", "rgcr_fast_solution"]}, 
     subplot_rows=1, 
-    subplot_cols=2,
+    subplot_cols=4,
     x_field="items", 
-    y_field="runtime", 
-    z_field="reviewers", 
-    subplot_field="func", 
+    y_field="runtime sec.", 
+    z_field="func", 
+    subplot_field="reviewers", 
     sharex=True, 
     sharey=True, 
     mean=True, 
@@ -140,11 +159,11 @@ multi_plot_results(
     results_csv_file=csv_path, 
     filter={"func": ["avg_solution", "rgcr_fast_solution"]}, 
     subplot_rows=1, 
-    subplot_cols=2,
+    subplot_cols=4,
     x_field="items", 
-    y_field="runtime", 
-    z_field="reviewers", 
-    subplot_field="func", 
+    y_field="runtime sec.", 
+    z_field="func", 
+    subplot_field="reviewers", 
     sharex=True, 
     sharey=True, 
     mean=True, 
@@ -174,4 +193,4 @@ input_range = {
 	"items": range(10, 300000, 1000)
 }
 
-ex.run_with_time_limit(run_fast_rgcr, input_range, time_limit=60)
+ex2.run_with_time_limit(run_fast_rgcr, input_range, time_limit=60)
