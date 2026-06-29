@@ -38,7 +38,7 @@ You can see the results in the *.png files in results.
 
 2. **Recall 5**
 
-   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/28eb5f24-99e1-4da7-8f54-d4cb11c244dc" />
+   <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/81d9b4c0-55ee-436d-bd86-beb08a2297eb" />
    
    This graph presents the Recall 5 metric, measuring the normalized number of overlapping items between the algorithm's top-5 output and the ground truth. The `rgcr` algorithm never go below 0.8, means it constantly right with 4/5 first items right. In contrast, the `avg_solution` exhibits significantly lower recall.
 
